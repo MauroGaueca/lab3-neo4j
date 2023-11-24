@@ -1,0 +1,91 @@
+CREATE(Manz:Arbol {tipo: "Manzano", nombreCientifico: "Malus domestica", longitud: 45.123, latitud: -34.567})
+CREATE(Palt:Arbol {tipo: "Palto", nombreCientifico: "Persea americana", longitud: 46.789, latitud: -33.987})
+CREATE(Noga:Arbol {tipo: "Nogal", nombreCientifico: "Juglans regia", longitud: 44.321, latitud: -35.678})
+CREATE(Nara:Arbol {tipo: "Naranjo", nombreCientifico: "Citrus sinensis", longitud: 47.654, latitud: -32.345})
+CREATE(Cere:Arbol {tipo: "Cerezo", nombreCientifico: "Prunus avium", longitud: 42.987, latitud: -38.123})
+CREATE(Dura:Arbol {tipo: "Duraznero", nombreCientifico: "Prunus persica", longitud: 49.567, latitud: -31.789})
+CREATE(Pino:Arbol {tipo: "Pino", nombreCientifico: "Pinus radiata", longitud: 47.890, latitud: -35.432})
+CREATE(Ciru:Arbol {tipo: "Ciruelo", nombreCientifico: "Prunus domestica", longitud: 44.765, latitud: -36.543})
+CREATE(Abed:Arbol {tipo: "Abedul", nombreCientifico: "Betula pendula", longitud: 45.234, latitud: -37.876})
+ 
+CREATE(S1:Sector {nombre: "Primer cuadrante"})
+CREATE(S2:Sector {nombre: "Segundo cuadrante"})
+CREATE(S3:Sector {nombre: "Tercer cuadrante"})
+ 
+CREATE(ClaudioNodo:Encargado {nombre: "Claudio Lopez", rut: "20.000.000-0"})
+CREATE(AndreaNodo:Encargado {nombre: "Andrea Perez", rut: "20.000.000-1"})
+CREATE(ArmandoNodo:Encargado {nombre: "Armando Meza", rut: "20.000.000-2"})
+ 
+CREATE(V1:Visita {fecha: date('2023-11-20')})
+CREATE(V2:Visita {fecha: date('2023-11-23')})
+CREATE(V3:Visita {fecha: date('2023-11-26')})
+ 
+ 
+CREATE(Es1:Formulario {tipo: "Estado Aspersor", estadoAspersor: "OPERATIVO", observacion: "Sin defectos", fotografia:"/home/mauro/Downloads/neco-arc-taunt.gif"})
+CREATE(Pl1:Formulario {tipo: "Plagas", plagaDetectada: "TRIPS", gradoDeDaño: "ALTO", poblacion: "MEDIO", fotografia: "", observacion: ""})
+CREATE(Con1:Formulario {tipo: "Conteo Frutas", frutaEnArbol:10, medida:"KILOS", fotografia: ""})
+CREATE(Enf1:Formulario {tipo: "Enfermedades", enfermedadDetectada: "PHYTOPHTHORA", gradoDeEnfermedad: "MEDIO", fotografia: "", observacion: ""})
+ 
+CREATE(Es2:Formulario {tipo: "Estado Aspersor", estadoAspersor: "OPERATIVO", observacion: "Sin defectos", fotografia:"/home/mauro/Downloads/neco-arc-taunt.gif"})
+CREATE(Pl2:Formulario {tipo: "Plagas", plagaDetectada: "ARANITA ROJA", gradoDeDaño: "LEVE", poblacion: "LEVE", fotografia: "", observacion: ""})
+CREATE(Con2:Formulario {tipo: "Conteo Frutas", frutaEnArbol:12, medida:"KILOS", fotografia: ""})
+CREATE(Enf2:Formulario {tipo: "Enfermedades", enfermedadDetectada: "FUSARIUM", gradoDeEnfermedad: "LEVE", fotografia: "", observacion: ""})
+ 
+CREATE(Es3:Formulario {tipo: "Estado Aspersor", estadoAspersor: "TAPADO", observacion: "", fotografia:"/home/mauro/Downloads/neco-arc-taunt.gif"})
+CREATE(Pl3:Formulario {tipo: "Plagas", plagaDetectada: "ESCAMA BLANCA", gradoDeDaño: "MEDIO", poblacion: "MEDIO", fotografia: "", observacion: ""})
+CREATE(Con3:Formulario {tipo: "Conteo Frutas", frutaEnArbol:20, medida:"KILOS", fotografia: ""})
+CREATE(Enf3:Formulario {tipo: "Enfermedades", enfermedadDetectada: "FUSARIUM", gradoDeEnfermedad: "MEDIO", fotografia: "", observacion: ""})
+
+Luego se crearon las relaciones entre los nodos:
+ 
+CREATE(S1)-[:TIENE]->(ClaudioNodo)
+CREATE(S2)-[:TIENE]->(AndreaNodo)
+CREATE(S3)-[:TIENE]->(ArmandoNodo)
+ 
+CREATE(Manz)-[:PERTENECE_A]->(S1)
+CREATE(Palt)-[:PERTENECE_A]->(S1)
+CREATE(Noga)-[:PERTENECE_A]->(S1)
+ 
+CREATE(Pino)-[:PERTENECE_A]->(S2)
+CREATE(Cere)-[:PERTENECE_A]->(S2)
+CREATE(Dura)-[:PERTENECE_A]->(S2)
+ 
+CREATE(Nara)-[:PERTENECE_A]->(S3)
+CREATE(Ciru)-[:PERTENECE_A]->(S3)
+CREATE(Abed)-[:PERTENECE_A]->(S3)
+ 
+CREATE(Es1)-[:ACERCA_DE]->(Manz)
+CREATE(Pl1)-[:ACERCA_DE]->(Manz)
+CREATE(Con1)-[:ACERCA_DE]->(Manz)
+CREATE(Enf1)-[:ACERCA_DE]->(Manz)
+ 
+CREATE(Es2)-[:ACERCA_DE]->(Cere)
+CREATE(Pl2)-[:ACERCA_DE]->(Cere)
+CREATE(Con2)-[:ACERCA_DE]->(Cere)
+CREATE(Enf2)-[:ACERCA_DE]->(Cere)
+ 
+CREATE(Es3)-[:ACERCA_DE]->(Abed)
+CREATE(Pl3)-[:ACERCA_DE]->(Abed)
+CREATE(Con3)-[:ACERCA_DE]->(Abed)
+CREATE(Enf3)-[:ACERCA_DE]->(Abed)
+ 
+CREATE(V1)-[:COMPLETA]->(Es3)
+CREATE(V1)-[:COMPLETA]->(Pl3)
+CREATE(V1)-[:COMPLETA]->(Con3)
+CREATE(V1)-[:COMPLETA]->(Enf3)
+ 
+CREATE(ArmandoNodo)-[:REALIZA]->(V1)
+ 
+CREATE(V2)-[:COMPLETA]->(Es2)
+CREATE(V2)-[:COMPLETA]->(Pl2)
+CREATE(V2)-[:COMPLETA]->(Con2)
+CREATE(V2)-[:COMPLETA]->(Enf2)
+ 
+CREATE(AndreaNodo)-[:REALIZA]->(V2)
+ 
+CREATE(V3)-[:COMPLETA]->(Es1)
+CREATE(V3)-[:COMPLETA]->(Pl1)
+CREATE(V3)-[:COMPLETA]->(Con1)
+CREATE(V3)-[:COMPLETA]->(Enf1)
+ 
+CREATE(ClaudioNodo)-[:REALIZA]->(V3)
